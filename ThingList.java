@@ -1,7 +1,46 @@
-public class ThingList {
-	Node head;
+import java.util.*;
 
-	public void ThingList(){
+
+public class ThingList {
+
+	private class Node {
+	    private Thing data;
+	    private Node  next;
+
+	    public Node(Thing data){
+	        this.next = null;
+	        this.data = data;
+	    }
+
+	    public void setNext(Node next){
+	        this.next = next;
+	    }
+
+	    public Node getNext(){
+	        return this.next;
+	    }
+
+	    public void setData(Thing data){
+	        this.data = data;
+	    }
+
+	    public Thing getData(){
+	        return this.data;
+	    }
+
+	    public void move(Random rand){
+	        data.maybeTurn(rand);
+	        data.step();
+	    }
+
+	    public String toString(){
+	        return data.toString();
+	    }
+	}
+
+	private Node head;
+
+	public ThingList(){
 		this.head = null;
 	}
 
@@ -14,13 +53,16 @@ public class ThingList {
 	}
 
 
-	public void addNode(Node node){
+	public void addThing(Thing data){
+		Node node = new Node(data);
 		if (getHead() == null) {
 			setHead(node);
 		} else {
 			Node current = head;
-			for (; current.getNext() != null; current = current.getNext())
+			while (current.getNext() != null) current = current.getNext();
 			current.setNext(node);
+
+
 		}
 	}
 
@@ -32,8 +74,13 @@ public class ThingList {
 		return output;
 	}
 
-	public void moveAll(){
-		for (Node current = head; current != null; current = current.getNext()) current.move();
+	public void printAll(){
+		for (Node current = head; current != null; current = current.getNext()) System.out.println(current.toString());
+	}
+
+
+	public void moveAll(Random rand){
+		for (Node current = head; current != null; current = current.getNext()) current.move(rand);
 	}
 
 }

@@ -3,6 +3,7 @@ import java.util.*;
 public class DotChaser {
 
   public static void main(String[] args) {
+    Random rand = new Random(System.currentTimeMillis());
     int N = 200;
 
     if( args.length != 0 ) N = Integer.parseInt(args[0]);
@@ -13,19 +14,16 @@ public class DotChaser {
     while( true ) {
       // Every N rounds, add another typeA and typeB Thing.
         if( count % N == 0 ) {
-
-            Thing tA = new Thing(45, 50);
-            list.addNode(new Node(tA));
-            Thing tB = new Thing(55, 50 ,true);
-            list.addNode(new Node(tB));
-
+            list.addThing(new TypeA(45, 50));
+            list.addThing(new TypeB(55, 50));
+            list.addThing(new TypeC(35, 50));
         }
 
-        System.out.println(list.toString());
+        list.printAll();
         System.out.println("done");
         System.out.flush();
 
-        list.moveAll();
+        list.moveAll(rand);
         count++;
     }
   }
